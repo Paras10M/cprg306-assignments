@@ -26,15 +26,20 @@ export default function HomePage() {
           </Link>
         </p>
 
-        {/* ✅ Week 5 link added */}
         <p>
           <Link href="/week-5" className="underline hover:text-gray-300">
             Go to Week 5 Assignment
           </Link>
         </p>
 
+        {/* ✅ Week 6 link added */}
+        <p>
+          <Link href="/week-6" className="underline hover:text-gray-300">
+            Go to Week 6 Assignment
+          </Link>
+        </p>
+
         {/* Optional future weeks */}
-        <p className="text-gray-500">Go to Week 6 →</p>
         <p className="text-gray-500">Go to Week 7 →</p>
         <p className="text-gray-500">Go to Week 8 →</p>
       </nav>

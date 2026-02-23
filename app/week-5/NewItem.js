@@ -10,7 +10,7 @@ export default function NewItem() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const item = { name, quantity, category };
+    const item = { name: name.trim(), quantity, category };
     console.log(item);
 
     alert(`Added: ${item.name}, quantity: ${item.quantity}, category: ${item.category}`);
@@ -53,24 +53,12 @@ export default function NewItem() {
             value={quantity}
             onChange={(e) => {
               const raw = e.target.value;
-
-              // If user clears the input, keep it valid
-              if (raw === "") {
-                setQuantity(1);
-                return;
-              }
+              if (raw === "") return; // allow user to clear while typing
 
               const value = Number(raw);
+              if (Number.isNaN(value)) return;
 
-              if (Number.isNaN(value)) {
-                setQuantity(1);
-              } else if (value < 1) {
-                setQuantity(1);
-              } else if (value > 99) {
-                setQuantity(99);
-              } else {
-                setQuantity(value);
-              }
+              setQuantity(Math.min(99, Math.max(1, value)));
             }}
             className="w-full p-2 rounded-md text-black"
           />
@@ -84,15 +72,15 @@ export default function NewItem() {
             id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full p-2 rounded-md text-white"
+            className="w-full p-2 rounded-md bg-zinc-800 text-white"
           >
             <option value="produce">Produce</option>
             <option value="dairy">Dairy</option>
             <option value="bakery">Bakery</option>
             <option value="meat">Meat</option>
-            <option value="frozen foods">Frozen Foods</option>
-            <option value="canned goods">Canned Goods</option>
-            <option value="dry goods">Dry Goods</option>
+            <option value="frozen">Frozen</option>
+            <option value="canned">Canned</option>
+            <option value="dry">Dry</option>
             <option value="beverages">Beverages</option>
             <option value="snacks">Snacks</option>
             <option value="household">Household</option>
@@ -102,7 +90,7 @@ export default function NewItem() {
 
         <button
           type="submit"
-          className="h-[42px] px-4 rounded-md bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold"
+          className="h-10.5 px-4 rounded-md bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold"
           aria-label="Add item"
           title="Add item"
         >
