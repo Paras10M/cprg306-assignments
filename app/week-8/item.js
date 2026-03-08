@@ -1,12 +1,17 @@
-export default function GroceryItem({ item, onSelect }) {
+export default function Item({ item, onSelect }) {
     return (
       <li
         onClick={() => onSelect(item)}
-        className="cursor-pointer hover:bg-zinc-800 p-2 rounded"
+        className="border border-gray-500 rounded-lg p-3 cursor-pointer hover:bg-zinc-900"
       >
-        <p className="font-semibold">{item.name}</p>
-        <p className="text-sm text-zinc-300">
-          Buy {item.quantity} in {item.category}
+        <p className="text-lg font-semibold">{item.name}</p>
+  
+        <p className="text-sm text-gray-300">
+          Quantity: {item.quantity}
+        </p>
+  
+        <p className="text-sm text-gray-300">
+          Category: {item.category}
         </p>
       </li>
     );

@@ -1,25 +1,18 @@
 "use client";
 
 import { useState } from "react";
-
-import NewGroceryItem from "./NewGroceryItem";
-import GroceryItemList from "./GroceryItemList";
+import NewItem from "./new-item";
+import ItemList from "./item-list";
 import MealIdeas from "./MealIdeas";
+import itemsData from "./items.json";
 
-import itemsData from "./grocery-items.json";
-
-// Cleans item names like: "chicken breast, 1 kg 🍗" -> "chicken breast"
 function cleanItemName(name) {
   if (!name) return "";
 
-  // remove anything after comma (sizes etc.)
   let cleaned = name.split(",")[0].trim();
-
-  // remove emojis + extra symbols (simple approach)
-  cleaned = cleaned.replace(/[\p{Extended_Pictographic}]/gu, "").trim();
-
-  // collapse extra spaces
-  cleaned = cleaned.replace(/\s+/g, " ");
+  cleaned = cleaned.replace(/[\p{Extended_Pictographic}]/gu, "");
+  cleaned = cleaned.replace(/[^\w\s-]/g, "");
+  cleaned = cleaned.trim().toLowerCase();
 
   return cleaned;
 }
@@ -29,7 +22,7 @@ export default function Page() {
   const [selectedItemName, setSelectedItemName] = useState("");
 
   function handleAddItem(item) {
-    setItems((prev) => [...prev, item]);
+    setItems([...items, item]);
   }
 
   function handleItemSelect(item) {
@@ -38,16 +31,31 @@ export default function Page() {
   }
 
   return (
-    <main className="min-h-screen bg-black p-6">
-      <h1 className="text-3xl font-bold text-white mb-6">Shopping List</h1>
+    <main className="min-h-screen bg-black text-white flex justify-center p-6">
+      <div className="w-full max-w-5xl">
 
-      <div className="flex flex-col md:flex-row gap-6">
-        <div className="space-y-6">
-          <NewGroceryItem onAddItem={handleAddItem} />
-          <GroceryItemList items={items} onItemSelect={handleItemSelect} />
+        <h1 className="text-3xl font-bold mb-6">
+          Shopping List + Meal Ideas
+        </h1>
+
+        <div className="flex flex-col md:flex-row gap-6">
+
+          <div className="w-full md:w-1/2">
+            <NewItem onAddItem={handleAddItem} />
+
+            <div className="mt-5">
+              <ItemList
+                items={items}
+                onItemSelect={handleItemSelect}
+              />
+            </div>
+          </div>
+
+          <div className="w-full md:w-1/2">
+            <MealIdeas ingredient={selectedItemName} />
+          </div>
+
         </div>
-
-        <MealIdeas ingredient={selectedItemName} />
       </div>
     </main>
   );

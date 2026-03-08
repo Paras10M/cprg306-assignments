@@ -2,35 +2,23 @@
 
 import { useEffect, useState } from "react";
 
-// Fetch meals that include an ingredient
 async function fetchMealIdeas(ingredient) {
   if (!ingredient) return [];
 
-  const res = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(
-      ingredient
-    )}`
+  const response = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
   );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch meal ideas");
-  }
-
-  const data = await res.json();
-  return data.meals ?? []; // API returns { meals: [...] } or { meals: null }
+  const data = await response.json();
+  return data.meals || [];
 }
 
 export default function MealIdeas({ ingredient }) {
   const [meals, setMeals] = useState([]);
 
   async function loadMealIdeas() {
-    try {
-      const result = await fetchMealIdeas(ingredient);
-      setMeals(result);
-    } catch (err) {
-      console.error(err);
-      setMeals([]);
-    }
+    const mealIdeas = await fetchMealIdeas(ingredient);
+    setMeals(mealIdeas);
   }
 
   useEffect(() => {
@@ -38,26 +26,31 @@ export default function MealIdeas({ ingredient }) {
   }, [ingredient]);
 
   return (
-    <div className="w-full max-w-md bg-zinc-900 text-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-bold mb-4">
-        Meal Ideas {ingredient ? `for "${ingredient}"` : ""}
+    <div className="w-full">
+      <h2 className="text-2xl font-bold mb-4">
+        {ingredient ? `Meal ideas for “${ingredient}”` : "Meal ideas (select an item)"}
       </h2>
 
       {!ingredient && (
-        <p className="text-zinc-300">Select an item to see meal ideas.</p>
+        <p className="text-gray-400">Choose an item to see ideas.</p>
       )}
 
       {ingredient && meals.length === 0 && (
-        <p className="text-zinc-300">No meal ideas found.</p>
+        <p className="text-gray-400">No meal ideas found.</p>
       )}
 
-      <ul className="space-y-2">
-        {meals.map((meal) => (
-          <li key={meal.idMeal} className="bg-zinc-800 p-3 rounded">
-            {meal.strMeal}
-          </li>
-        ))}
-      </ul>
+      {ingredient && meals.length > 0 && (
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {meals.map((meal) => (
+            <li
+              key={meal.idMeal}
+              className="border border-white rounded-lg p-4 text-lg leading-snug hover:bg-zinc-900"
+            >
+              {meal.strMeal}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
