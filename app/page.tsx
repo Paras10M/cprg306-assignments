@@ -1,3 +1,4 @@
+```javascript
 import Link from "next/link";
 
 export default function HomePage() {
@@ -38,15 +39,17 @@ export default function HomePage() {
           </Link>
         </p>
 
-        {/* ✅ Week 7 link */}
         <p>
           <Link href="/week-7" className="underline hover:text-gray-300">
             Go to Week 7 Assignment
           </Link>
         </p>
 
-        {/* Optional future weeks */}
-        <p className="text-gray-500">Go to Week 8 →</p>
+        <p>
+          <Link href="/week-8" className="underline hover:text-gray-300">
+            Go to Week 8 Assignment
+          </Link>
+        </p>
       </nav>
 
       <p className="mt-6">Name: Paras Odedara</p>
@@ -57,3 +60,4 @@ export default function HomePage() {
     </main>
   );
 }
+```
