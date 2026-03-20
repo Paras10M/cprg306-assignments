@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useUserAuth } from "../../contexts/AuthContext";
+import { useUserAuth } from "../contexts/AuthContext";
 import ItemList from "./item-list";
 import NewItem from "./new-item";
 import MealIdeas from "./MealIdeas";
