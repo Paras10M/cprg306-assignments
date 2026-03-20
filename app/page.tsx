@@ -49,6 +49,19 @@ export default function HomePage() {
             Go to Week 8 Assignment
           </Link>
         </p>
+
+        <p>
+          <Link href="/week-9" className="underline hover:text-gray-300">
+            Go to Week 9 Assignment
+          </Link>
+        </p>
+
+        <p>
+          <Link href="/week-10" className="underline hover:text-gray-300">
+            Go to Week 10 Assignment
+          </Link>
+        </p>
+
       </nav>
 
       <p className="mt-6">Name: Paras Odedara</p>

@@ -1,0 +1,14 @@
+[
+    { "id": "1", "name": "bananas 🍌", "quantity": 6, "category": "produce" },
+    { "id": "2", "name": "bread 🍞", "quantity": 2, "category": "bakery" },
+    { "id": "3", "name": "broccoli 🥦", "quantity": 3, "category": "produce" },
+    { "id": "4", "name": "chicken breasts, 1 kg 🍗", "quantity": 1, "category": "meat" },
+    { "id": "5", "name": "dish soap 🍽️", "quantity": 1, "category": "household" },
+    { "id": "6", "name": "eggs, dozen 🥚", "quantity": 2, "category": "dairy" },
+    { "id": "7", "name": "hand soap 🧼", "quantity": 4, "category": "household" },
+    { "id": "8", "name": "milk, 4 L 🥛", "quantity": 1, "category": "dairy" },
+    { "id": "9", "name": "paper towels, 6 pack", "quantity": 1, "category": "household" },
+    { "id": "10", "name": "pasta sauce 🍝", "quantity": 3, "category": "canned goods" },
+    { "id": "11", "name": "spaghetti, 454 g 🍝", "quantity": 2, "category": "dry goods" },
+    { "id": "12", "name": "toilet paper, 12 pack 🧻", "quantity": 1, "category": "household" }
+  ]
